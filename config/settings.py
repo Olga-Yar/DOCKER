@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_simplejwt',
 
-    'django.contrib.staticfiles',
     'drf_yasg',
     'corsheaders',
 ]
@@ -164,7 +163,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = False 
 
 AUTH_USER_MODEL = 'users.UserCustom'
 LOGIN_REDIRECT_URL = '/'
