@@ -6,7 +6,7 @@ from users.models import UserCustom
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        user = User.objects.create(
+        user = UserCustom.objects.create(
             email='test_test@test.ru',
             first_name='admin',
             last_name='admin',
