@@ -8,7 +8,8 @@ app_name = HabitsConfig.name
 
 urlpatterns = [
     path('habit/', HabitViewSet.as_view({'get': 'list'})),
-    path('habit/<int:pk>/', HabitViewSet.as_view({'put': 'update'})),
+    path('habit/<int:pk>/', HabitViewSet.as_view({'get': 'retrieve'})),
+    path('habit/<int:pk>/update/', HabitViewSet.as_view({'put': 'update'})),
     path('habit/create/', HabitViewSet.as_view({'put': 'create'})),
 ]
 
