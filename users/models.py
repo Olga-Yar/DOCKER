@@ -10,7 +10,7 @@ class UserRoles(models.TextChoices):
     MODERATOR = 'moderator', _('moderator')
 
 
-class User(AbstractUser):
+class UserCustom(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='почта')
     first_name = models.CharField(max_length=150, verbose_name='имя', **NULLABLE)
@@ -19,6 +19,9 @@ class User(AbstractUser):
     phone = models.IntegerField(default=None, verbose_name='телефон', **NULLABLE)
 
     role = models.CharField(max_length=10, choices=UserRoles.choices, default=UserRoles.MEMBER)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return f'{self.first_name}, {self.last_name}'
