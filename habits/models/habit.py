@@ -13,7 +13,7 @@ class Habit(models.Model):
     is_connect = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='связанная привычка', **NULLABLE)
     periodic = models.IntegerField(verbose_name='периодичность')
     reward = models.CharField(max_length=50, verbose_name='вознаграждение')
-    execution_time = models.TimeField(default='00:00:05', verbose_name='время на выполнение')
+    execution_time = models.TimeField(default='00:01:00', verbose_name='время на выполнение')
     is_public = models.BooleanField(default=False, verbose_name='публикация')
 
     def __str__(self):
