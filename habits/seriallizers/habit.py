@@ -4,6 +4,7 @@ from habits.models.habit import Habit
 
 
 class HabitSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Habit
