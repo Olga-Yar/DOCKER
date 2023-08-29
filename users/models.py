@@ -17,6 +17,8 @@ class UserCustom(AbstractUser):
     last_name = models.CharField(max_length=150, verbose_name='фамилия', **NULLABLE)
     avatar = models.ImageField(upload_to='Users/', verbose_name='аватар', **NULLABLE)
     phone = models.IntegerField(default=None, verbose_name='телефон', **NULLABLE)
+    chat_id = models.CharField(max_length=150, unique=True, verbose_name='id телеграмм', **NULLABLE)
+    telegram = models.CharField(max_length=50, unique=True, verbose_name='телеграмм', **NULLABLE)
 
     role = models.CharField(max_length=10, choices=UserRoles.choices, default=UserRoles.MEMBER)
 
