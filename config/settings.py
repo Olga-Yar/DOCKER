@@ -13,6 +13,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from celery.schedules import crontab
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 
     'drf_yasg',
     'corsheaders',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -181,4 +183,21 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'yarosholha@yandex.ru'
+
+TELEGRAM_API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+CELERY_BEAT_SCHEDULE = {
+    'getUpdate HabitBot': {
+        'task': 'habits.tasks.getUpdate_bot',
+        'schedule': timedelta(seconds=5),
+    },
+    'send reminders': {
+        'task': 'habits.tasks.send_reminders',
+        'schedule': crontab(hour='19', minute='0')
+    },
+}
 
