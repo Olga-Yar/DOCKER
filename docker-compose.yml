@@ -29,6 +29,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
+    network_mode: host
     image: app
     container_name: app_container
     depends_on:
