@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: postgres
+    image: postgres:14-alpine3.17
     container_name: db_app
     env_file:
       - .env
@@ -17,7 +17,7 @@ services:
       retries: 5
 
   redis:
-    image: redis
+    image: redis:7.0.2-alpine
     container_name: redis_app
     command: redis-server --save 20 1 --loglevel warning
     ports:
@@ -26,11 +26,11 @@ services:
       - ./data/cache:/data
 
   app:
+    image: python:3.11.4-alpine317
     build:
       context: .
       dockerfile: ./docker/Dockerfile
     network_mode: host
-    image: app
     container_name: app_container
     depends_on:
       db:
