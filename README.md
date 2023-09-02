@@ -24,6 +24,8 @@ https://www.docker.com/ <br> <br>
 https://github.com/Olga-Yar/DOCKER <br> <br>
 3. Запустить процесс создания и запуска образа <br>
 docker-compose up (build) <br> <br>
+4. Запустить программу <br>
+python3 manage.py runserver <br><br>
 4. Документация проекта (swagger или redoc) <br>
 http://127.0.0.1:8000/swagger/  <br>
 http://127.0.0.1:8000/redoc/ <br> <br>
