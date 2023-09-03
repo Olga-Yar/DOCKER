@@ -4,6 +4,20 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+set -e
+
+# Ожидать запуска PostgreSQL
+until psql -h "db" -U "$POSTGRES_USER" -c '\l'; do
+  >&2 echo "PostgreSQL is unavailable - sleeping"
+  sleep 1
+done
+
+# Создать базу данных
+psql -v ON_ERROR_STOP=1 -h "db" -U "postgres" <<-EOSQL
+  CREATE DATABASE habits_prj;
+EOSQL
+
+
 python3 manage.py collectstatic --no-input
 python3 manage.py migrate --no-input
 

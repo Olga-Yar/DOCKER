@@ -5,6 +5,8 @@ WORKDIR /app
 COPY requirements.txt /app/
 
 RUN pip3 install -r requirements.txt
+RUN apt-get update && apt-get install -y postgresql-client
+
 
 COPY . /app/
 COPY ./entrypoint /

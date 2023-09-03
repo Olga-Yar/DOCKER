@@ -7,14 +7,19 @@ services:
     env_file:
       - .env
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=habits_prj
+      - PGDATA=/var/lib/postgresql/data/pgdata
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready']
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 2
 
   redis:
     image: redis
@@ -30,7 +35,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    network_mode: host
     container_name: app_container
     depends_on:
       db:
@@ -44,4 +48,7 @@ services:
     volumes:
       - .:/app
     command: python3 manage.py runserver 0.0.0.0:8000
+
+volumes:
+  pg_data:
 
