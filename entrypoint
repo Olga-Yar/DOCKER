@@ -14,7 +14,7 @@ done
 
 # Создать базу данных
 psql -v ON_ERROR_STOP=1 -h "db" -U "postgres" <<-EOSQL
-  CREATE DATABASE habits_prj;
+  CREATE DATABASE postgres;
 EOSQL
 
 
