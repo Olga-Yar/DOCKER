@@ -8,17 +8,16 @@ services:
     env_file:
       - .env
     volumes:
-      - pg_data:/var/lib/postgresql/data/pgdata
+      - pg_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=habits_prj
-      - PGDATA=/var/lib/postgresql/data/pgdata
     user: postgres
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready']
+      test: [ 'CMD-SHELL', 'pg_isready' ]
       interval: 10s
       timeout: 5s
       retries: 2
@@ -52,21 +51,21 @@ services:
     tty: true
     command: python3 manage.py runserver 0.0.0.0:8000
 
-#  celery:
-#    build: .
-#    tty: true
-#    command: celery -A config worker -l INFO
-#    depends_on:
-#      - redis
-#      - app
-#
-#  celery_beat:
-#    build: .
-#    tty: true
-#    command: celery -A config beat -l INFO -S django
-#    depends_on:
-#      - redis
-#      - app
+  celery:
+    build: .
+    tty: true
+    command: celery -A config worker -l INFO
+    depends_on:
+      - redis
+      - app
+
+  celery_beat:
+    build: .
+    tty: true
+    command: celery -A config beat -l INFO -S django
+    depends_on:
+      - redis
+      - app
 
 
 volumes:
